@@ -1,8 +1,10 @@
+import setuptools
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="pwrols", 
+    name="pwrols_bknight_test_2", 
     version="0.0.1",
     author="Benjamin S. Knight",
     author_email="knight.benjamin@gmail.com",
