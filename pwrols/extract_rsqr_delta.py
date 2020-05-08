@@ -1,4 +1,7 @@
-def extract_rsqr_delta(df, dv, t, iv = None, cluster_key = None):
+import pandas as pd
+import statsmodels.api as sm
+
+def extract_r_delta(df, dv, t, iv = None):
     """Returns delta of r-squared with and without treatment variable.
   
     This function 
@@ -7,28 +10,23 @@ def extract_rsqr_delta(df, dv, t, iv = None, cluster_key = None):
     df (Pandas dataframe): Pandas dataframe containing the model data
     dv (string): Dependent/response variable 
     t (string): Column of dataframe denoting assignment of the treatment
-    iv (list): List of independent variables 
-    cluster_key (string): Column of dataframe data is clustered on if data is clustered    
+    iv (list): List of independent variables  
   
     Returns: 
     float: estimated r-squared     
     """
+
+    Y = df[dv]
     
     if iv is not None:
-        X = df[t + iv]
+        iv.append(t)
+        X1 = df[iv]
     else:
-        X = df[t]
-    X = sm.add_constant(X)
-    Y = df[dv]
-    model1 = sm.OLS(Y.astype(float), X.astype(float)).fit()
-
-
-    if iv is not None:
-        X = df[iv]
-        X = sm.add_constant(X)
-    else:
-        X['X'] = 1
-        X = X['X']
-    model2 = sm.OLS(Y.astype(float), X.astype(float)).fit()
-
+        X1 = df[t]
+    X1 = sm.add_constant(X1)
+    X2 = X1['const']
+    
+    model1 = sm.OLS(Y.astype(float), X1.astype(float)).fit()
+    model2 = sm.OLS(Y.astype(float), X2.astype(float)).fit()
+    
     return max(model1.rsquared, 0) - max(model2.rsquared, 0) 
