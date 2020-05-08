@@ -4,7 +4,8 @@ import statsmodels.api as sm
 def extract_r_delta(df, dv, t, iv = None):
     """Returns delta of r-squared with and without treatment variable.
   
-    This function 
+    This function performs 2 OLS regressions, with and without the treatment
+    variable, in order to infer the change in r-squared as a function of treatment.
   
     Parameters: 
     df (Pandas dataframe): Pandas dataframe containing the model data
