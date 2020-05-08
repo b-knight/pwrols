@@ -14,7 +14,7 @@ def extract_r_delta(df, dv, t, iv = None):
     iv (list): List of independent variables  
   
     Returns: 
-    float: estimated r-squared     
+    float: Estimated change in r-squared corresponding with the addition of the treatment variable.     
     """
 
     Y = df[dv]
