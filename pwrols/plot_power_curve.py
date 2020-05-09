@@ -3,6 +3,21 @@ import matplotlib.pyplot as plt
 from matplotlib import rcParams
 
 def plot_power_curve(power_df, num_days, metric_name):
+    """Returns an image file illustrating the power curve.
+  
+    This function takes a dataframe of power estimates as well as a list of hypothetical 
+    run times for the hypothesis test, and assembles them into a heat map of the form (X,Y,Z)
+    where X is the hypothetical run time in days, Y is the hypothetical effect size, and
+    Z is the estimated statistical power.
+  
+    Parameters: 
+    power_df (Pandas dataframe): Pandas dataframe containing the MDEs and power estimates
+    num_days (list of integers): A list of the number of days (integers) of hypothetical run times
+    metric_name (string): The name of the metric used in the hypothetical A/B test 
+    
+    Returns: 
+    None: Saves a .png file to the local machine
+    """    
     
     plt.tight_layout()
     
