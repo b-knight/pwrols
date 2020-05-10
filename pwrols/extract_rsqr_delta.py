@@ -1,7 +1,7 @@
 import pandas as pd
 import statsmodels.api as sm
 
-def extract_r_delta(df, dv, t, iv = None):
+def extract_rsqr_delta(df, dv, t, iv = None):
     """Returns delta of r-squared with and without treatment variable.
   
     This function performs 2 OLS regressions, with and without the treatment
