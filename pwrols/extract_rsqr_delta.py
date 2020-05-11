@@ -22,13 +22,14 @@ def extract_rsqr_delta(df, dv, t, iv = None):
     if iv is not None:
         X2 = df[iv]
         X2 = sm.add_constant(X2)
-        iv.append(t)
-        X1 = df[iv]
-        X1 = sm.add_constant(X1)
+        X1 = X2.copy()
+        X1['treated'] = df[t]
+        k = len(X1.columns)
     else:
         X1 = df[t]
         X1 = sm.add_constant(X1)
         X2 = X1['const']
+        k = 1
 
     model1 = sm.OLS(Y.astype(float), X1.astype(float)).fit()
     print("With treatment, the estimated r-squared is {}.".format(model1.rsquared))
